@@ -166,67 +166,96 @@
     <!-- Intro: Where do you live? -->
     <section id="intro" class="content-section active">
         <div class="space-y-8">
-            <div class="activity-card border-rose-400">
-                <h2 class="text-3xl font-bold text-center text-rose-400 mb-6">Where do you live?</h2>
-                <div class="flex justify-center">
-                    <img src="https://johanka2014.github.io/get_ready_for_movers/mod_0/1.png" alt="classroom picture" class="rounded-2xl shadow-md w-full max-w-4xl">
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Daisy's Address & The Building</h2>
+                <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                    <img src="https://placehold.co/400x300/e0f2fe/0369a1?text=Daisy's+Address" alt="Daisy talking about her flat" class="rounded-2xl shadow-md w-full md:w-1/2">
+                    <div class="bg-yellow-100 p-6 rounded-xl shadow-inner w-full md:w-1/2">
+                        <p class="text-xl font-semibold mb-4">"Hi! I'm Daisy. This is my address. I live in a flat on the fifth floor. My brother is at home. He's dressing up."</p>
+                        <div class="bg-white p-4 rounded border-2 border-gray-300 font-mono text-lg">
+                            Daisy Simms,<br>
+                            Flat 5a,<br>
+                            74 Browning Road,<br>
+                            Littlemore
+                        </div>
+                    </div>
                 </div>
-            </div>
 
             <div class="activity-card border-sky-400">
-                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Listen and Point to the Numbers</h2>
-                <div class="flex flex-col items-center gap-6">
+                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Listen and Match the Numbers</h2>
+                <div class="flex flex-col items-center gap-6" id="number-match-game">
                     <audio controls src="Movers - 2.mp3" class="w-full max-w-md">
                         Your browser does not support the audio element.
                     </audio>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-2xl text-center font-bold text-2xl text-sky-800">
-                        <div class="bg-sky-100 p-4 rounded-xl">10</div>
-                        <div class="bg-sky-100 p-4 rounded-xl">20</div>
-                        <div class="bg-sky-100 p-4 rounded-xl">30</div>
-                        <div class="bg-sky-100 p-4 rounded-xl">40</div>
-                        <div class="bg-sky-100 p-4 rounded-xl">50</div>
-                        <div class="bg-sky-100 p-4 rounded-xl">60</div>
-                        <div class="bg-sky-100 p-4 rounded-xl">70</div>
-                        <div class="bg-sky-100 p-4 rounded-xl">80</div>
-                        <div class="bg-sky-100 p-4 rounded-xl">90</div>
-                        <div class="bg-sky-100 p-4 rounded-xl">100</div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="activity-card border-sky-400">
-                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Write the Numbers</h2>
-                <p class="text-center text-gray-600 mb-6">Read the words and type the correct number into the box.</p>
-                <div class="max-w-2xl mx-auto space-y-4 text-xl">
-                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
-                        <span class="font-semibold">twenty-one</span>
-                        <input type="text" id="num-21" class="text-input w-24" data-answer="21">
+                    <p class="text-center text-gray-600 text-lg">Drag the number blocks to the correct words.</p>
+
+                    <!-- Number Bank (Draggable Items) -->
+                    <div id="number-bank" class="flex flex-wrap justify-center gap-4 p-6 bg-sky-50 rounded-xl border-2 border-sky-200 w-full max-w-3xl min-h-[100px]">
+                        <!-- Jumbled order for the game -->
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="40" id="item-40">40</div>
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="10" id="item-10">10</div>
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="80" id="item-80">80</div>
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="50" id="item-50">50</div>
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="20" id="item-20">20</div>
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="100" id="item-100">100</div>
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="30" id="item-30">30</div>
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="90" id="item-90">90</div>
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="60" id="item-60">60</div>
+                        <div class="draggable-item shadow-md text-3xl font-bold px-6 py-4 bg-white border-sky-400 text-sky-600" draggable="true" data-match-id="70" id="item-70">70</div>
                     </div>
-                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
-                        <span class="font-semibold">forty-nine</span>
-                        <input type="text" id="num-49" class="text-input w-24" data-answer="49">
+
+                    <!-- Drop Zones (Written Words) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-3xl">
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">ten</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="10" id="zone-10"></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">sixty</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="60" id="zone-60"></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">twenty</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="20" id="zone-20"></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">seventy</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="70" id="zone-70"></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">thirty</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="30" id="zone-30"></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">eighty</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="80" id="zone-80"></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">forty</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="40" id="zone-40"></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">ninety</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="90" id="zone-90"></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">fifty</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="50" id="zone-50"></div>
+                        </div>
+                        <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                            <div class="font-bold text-xl w-1/2 text-right text-gray-700">one hundred</div>
+                            <div class="drop-zone w-1/2 min-h-[70px]" data-correct-item="100" id="zone-100"></div>
+                        </div>
                     </div>
-                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
-                        <span class="font-semibold">fifteen</span>
-                        <input type="text" id="num-15" class="text-input w-24" data-answer="15">
+
+                    <!-- Buttons & Feedback -->
+                    <div class="text-center mt-6">
+                        <button onclick="checkNumberMatch()" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg shadow-md hover:shadow-lg">Check Answers</button>
+                        <button onclick="resetNumberMatch()" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg ml-4 shadow-md hover:shadow-lg">Reset</button>
                     </div>
-                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
-                        <span class="font-semibold">sixty-two</span>
-                        <input type="text" id="num-62" class="text-input w-24" data-answer="62">
-                    </div>
-                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
-                        <span class="font-semibold">ninety-four</span>
-                        <input type="text" id="num-94" class="text-input w-24" data-answer="94">
-                    </div>
-                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
-                        <span class="font-semibold">fifty-six</span>
-                        <input type="text" id="num-56" class="text-input w-24" data-answer="56">
-                    </div>
+                    <div id="number-match-feedback" class="mt-2 text-center text-xl font-bold h-8"></div>
                 </div>
-                <div class="text-center mt-8">
-                    <button onclick="checkNumbersGame()" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
-                </div>
-                <div id="numbers-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
             </div>
 
             <div class="activity-card border-sky-400">
@@ -243,7 +272,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <h3 class="text-2xl font-bold text-center text-sky-500 mb-4">Who is on which floor?</h3>
                 <p class="text-center text-gray-600 mb-6">Match the people and things to the correct floor of the building.</p>
 
@@ -347,289 +376,4 @@
             <div class="activity-card border-rose-400">
                 <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">Language Practice: Opposites</h2>
                 <div class="flex justify-center mb-6">
-                    <img src="https://placehold.co/600x200/ffe4e6/e11d48?text=Opposites+Illustrations" alt="Tall/short, young/old, big/small" class="rounded-2xl shadow-md w-full max-w-3xl">
-                </div>
-                <p class="text-center text-gray-600 mb-6">Type the correct opposite for each word.</p>
-                <div class="flex flex-wrap justify-center gap-4 font-bold text-xl mb-6">
-                    <span class="px-4 py-2 bg-gray-100 rounded-lg text-gray-500">young</span>
-                    <span class="px-4 py-2 bg-gray-100 rounded-lg text-gray-500">big</span>
-                    <span class="px-4 py-2 bg-gray-100 rounded-lg text-gray-500">short</span>
-                    <span class="px-4 py-2 bg-gray-100 rounded-lg text-gray-500">long</span>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto text-xl">
-                    <div class="flex items-center justify-between bg-rose-50 p-4 rounded-xl">
-                        <span class="font-bold">1. tall</span>
-                        <span class="mx-2 text-rose-400">↔</span>
-                        <input type="text" id="opp-1" class="text-input w-32" data-answer="short">
-                    </div>
-                    <div class="flex items-center justify-between bg-rose-50 p-4 rounded-xl">
-                        <span class="font-bold">2. old</span>
-                        <span class="mx-2 text-rose-400">↔</span>
-                        <input type="text" id="opp-2" class="text-input w-32" data-answer="young">
-                    </div>
-                    <div class="flex items-center justify-between bg-rose-50 p-4 rounded-xl">
-                        <span class="font-bold">3. small</span>
-                        <span class="mx-2 text-rose-400">↔</span>
-                        <input type="text" id="opp-3" class="text-input w-32" data-answer="big">
-                    </div>
-                    <div class="flex items-center justify-between bg-rose-50 p-4 rounded-xl">
-                        <span class="font-bold">4. short (hair)</span>
-                        <span class="mx-2 text-rose-400">↔</span>
-                        <input type="text" id="opp-4" class="text-input w-32" data-answer="long">
-                    </div>
-                </div>
-                <div class="text-center mt-8">
-                    <button onclick="checkOpposites()" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
-                </div>
-                <div id="opposites-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
-            </div>
-
-            <div class="activity-card border-rose-400">
-                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">Language Practice: Comparatives</h2>
-                <div class="max-w-3xl mx-auto space-y-6">
-                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                        <img src="https://placehold.co/400x200/ffe4e6/e11d48?text=Tall+Girl+and+Short+Boy" alt="Tall girl and short boy" class="mx-auto rounded-xl shadow-sm mb-4">
-                        <p class="text-xl text-center mb-4">Type <span class="font-bold text-rose-500">taller</span> or <span class="font-bold text-rose-500">shorter</span></p>
-                        <div class="space-y-4 text-lg">
-                            <p>The boy is <input type="text" id="comp-1" class="text-input w-32 mx-2" data-answer="shorter"> than the girl.</p>
-                            <p>The girl is <input type="text" id="comp-2" class="text-input w-32 mx-2" data-answer="taller"> than the boy.</p>
-                        </div>
-                    </div>
-
-                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                        <img src="https://placehold.co/400x200/ffe4e6/e11d48?text=Old+Woman+and+Young+Boy" alt="Old woman and young boy" class="mx-auto rounded-xl shadow-sm mb-4">
-                        <p class="text-xl text-center mb-4">Type <span class="font-bold text-rose-500">older</span> or <span class="font-bold text-rose-500">younger</span></p>
-                        <div class="space-y-4 text-lg">
-                            <p>The man is <input type="text" id="comp-3" class="text-input w-32 mx-2" data-answer="younger"> than the woman.</p>
-                            <p>The woman is <input type="text" id="comp-4" class="text-input w-32 mx-2" data-answer="older"> than the man.</p>
-                        </div>
-                    </div>
-
-                    <div class="text-center mt-8">
-                        <button onclick="checkComparatives()" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Sentences</button>
-                    </div>
-                    <div id="comparatives-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
-                </div>
-            </div>
-
-            <div class="activity-card border-rose-400">
-                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">Listening Practice Test</h2>
-                <div class="flex flex-col items-center gap-6">
-                    <img src="https://placehold.co/600x400/ffe4e6/e11d48?text=Park+Scene+Test" alt="Park scene with children playing" class="rounded-2xl shadow-md w-full max-w-2xl">
-                    <p class="text-lg text-gray-600">Listen and draw lines (Practice looking at the image while you listen).</p>
-                    <audio controls src="Movers - 9.mp3" class="w-full max-w-md">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div>
-            </div>
-        </div>
-        <div class="text-center mt-8">
-            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
-        </div>
-    </section>
-
-    <!-- Empty Placeholders for Remaining Units -->
-    <section id="unit2" class="content-section"><div class="activity-card border-violet-400"><h2 class="text-3xl font-bold text-center text-violet-600">Unit 2: A busy week</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit3" class="content-section"><div class="activity-card border-emerald-400"><h2 class="text-3xl font-bold text-center text-emerald-600">Unit 3: In the town</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit4" class="content-section"><div class="activity-card border-orange-400"><h2 class="text-3xl font-bold text-center text-orange-600">Unit 4: At home</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="rev1" class="content-section"><div class="activity-card border-gray-500"><h2 class="text-3xl font-bold text-center text-gray-600">Revision 1</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit5" class="content-section"><div class="activity-card border-teal-400"><h2 class="text-3xl font-bold text-center text-teal-600">Unit 5: Let's go on holiday</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit6" class="content-section"><div class="activity-card border-sky-400"><h2 class="text-3xl font-bold text-center text-sky-600">Unit 6: My favourite book</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit7" class="content-section"><div class="activity-card border-rose-400"><h2 class="text-3xl font-bold text-center text-rose-600">Unit 7: This is my family</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit8" class="content-section"><div class="activity-card border-violet-400"><h2 class="text-3xl font-bold text-center text-violet-600">Unit 8: What's for lunch?</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="rev2" class="content-section"><div class="activity-card border-gray-500"><h2 class="text-3xl font-bold text-center text-gray-600">Revision 2</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit9" class="content-section"><div class="activity-card border-emerald-400"><h2 class="text-3xl font-bold text-center text-emerald-600">Unit 9: Do you like animals?</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit10" class="content-section"><div class="activity-card border-orange-400"><h2 class="text-3xl font-bold text-center text-orange-600">Unit 10: What's the weather like?</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit11" class="content-section"><div class="activity-card border-teal-400"><h2 class="text-3xl font-bold text-center text-teal-600">Unit 11: What's the matter?</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="unit12" class="content-section"><div class="activity-card border-sky-400"><h2 class="text-3xl font-bold text-center text-sky-600">Unit 12: In the countryside</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-    <section id="rev3" class="content-section"><div class="activity-card border-gray-500"><h2 class="text-3xl font-bold text-center text-gray-600">Revision 3</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
-
-</main>
-
-<script>
-    // --- Navigation Logic ---
-    function showSection(sectionId) {
-        document.querySelectorAll('.content-section').forEach(section => {
-            section.classList.remove('active');
-        });
-        document.querySelectorAll('.nav-button').forEach(button => {
-            button.classList.remove('active');
-        });
-        document.getElementById(sectionId).classList.add('active');
-        
-        const activeBtn = Array.from(document.querySelectorAll('.nav-button')).find(btn => {
-            const onclickVal = btn.getAttribute('onclick');
-            return onclickVal && onclickVal.includes(`'${sectionId}'`);
-        });
-        if (activeBtn) activeBtn.classList.add('active');
-        window.scrollTo({top: 0, behavior: 'smooth'});
-    }
-
-    // --- Utility Function for Text Input Validation ---
-    function validateInputs(inputIds, feedbackId) {
-        const feedbackEl = document.getElementById(feedbackId);
-        let allCorrect = true;
-        let correctCount = 0;
-
-        inputIds.forEach(id => {
-            const el = document.getElementById(id);
-            if (!el) return;
-            const userAnswer = el.value.trim().toLowerCase();
-            const correctAnswer = el.dataset.answer.toLowerCase();
-
-            el.classList.remove('correct-input', 'incorrect-input');
-
-            if (userAnswer === correctAnswer) {
-                el.classList.add('correct-input');
-                correctCount++;
-            } else {
-                el.classList.add('incorrect-input');
-                allCorrect = false;
-            }
-        });
-
-        if (allCorrect) {
-            feedbackEl.textContent = 'Excellent! All correct!';
-            feedbackEl.style.color = '#10B981';
-        } else {
-            feedbackEl.textContent = `You got ${correctCount} out of ${inputIds.length} correct. Try again!`;
-            feedbackEl.style.color = '#EF4444';
-        }
-    }
-
-    // --- Intro: Numbers Game ---
-    function checkNumbersGame() {
-        validateInputs(['num-21', 'num-49', 'num-15', 'num-62', 'num-94', 'num-56'], 'numbers-feedback');
-    }
-
-    // --- Intro: Drag & Drop Floors ---
-    let draggedFloorItem = null;
-
-    function initFloorDragDrop() {
-        document.querySelectorAll('#floor-bank .draggable-item').forEach(item => {
-            item.addEventListener('dragstart', (e) => {
-                draggedFloorItem = item;
-                e.dataTransfer.setData('text/plain', item.dataset.matchId);
-                item.classList.add('dragging');
-            });
-            item.addEventListener('dragend', () => {
-                item.classList.remove('dragging');
-                draggedFloorItem = null;
-            });
-        });
-
-        document.querySelectorAll('.drop-zone').forEach(zone => {
-            zone.addEventListener('dragover', (e) => {
-                e.preventDefault(); 
-                zone.classList.add('drag-over');
-            });
-            zone.addEventListener('dragleave', () => {
-                zone.classList.remove('drag-over');
-            });
-            zone.addEventListener('drop', (e) => {
-                e.preventDefault();
-                zone.classList.remove('drag-over');
-
-                if (draggedFloorItem && zone.children.length === 0) {
-                    zone.appendChild(draggedFloorItem);
-                }
-            });
-        });
-    }
-
-    function checkFloorMatch() {
-        const zones = ['basement', 'ground', 'first', 'second', 'third', 'fourth'];
-        let correctCount = 0;
-        const feedbackEl = document.getElementById('floor-feedback');
-
-        zones.forEach(z => {
-            const zone = document.getElementById(`zone-${z}`);
-            const item = zone.querySelector('.draggable-item');
-            zone.classList.remove('incorrect-drop', 'correctly-placed');
-
-            if (item) {
-                if (item.dataset.matchId === z) {
-                    zone.classList.add('correctly-placed');
-                    item.draggable = false;
-                    item.classList.add('cursor-not-allowed');
-                    correctCount++;
-                } else {
-                    zone.classList.add('incorrect-drop');
-                    setTimeout(() => zone.classList.remove('incorrect-drop'), 500);
-                }
-            } else {
-                zone.classList.add('incorrect-drop');
-                setTimeout(() => zone.classList.remove('incorrect-drop'), 500);
-            }
-        });
-
-        if (correctCount === zones.length) {
-            feedbackEl.textContent = 'Fantastic! You found where everyone lives!';
-            feedbackEl.style.color = '#10B981';
-        } else {
-            feedbackEl.textContent = `You placed ${correctCount} items correctly. Keep trying!`;
-            feedbackEl.style.color = '#EF4444';
-        }
-    }
-
-    function resetFloorMatch() {
-        const bank = document.getElementById('floor-bank');
-        document.querySelectorAll('.draggable-item').forEach(item => {
-            item.draggable = true;
-            item.classList.remove('cursor-not-allowed');
-            bank.appendChild(item);
-        });
-        document.querySelectorAll('.drop-zone').forEach(zone => {
-            zone.classList.remove('correctly-placed', 'incorrect-drop');
-        });
-        document.getElementById('floor-feedback').textContent = '';
-    }
-
-    // --- Unit 1: Missing Letter Verbs ---
-    function checkVerbLetters() {
-        const inputIds = ['verb-1-1', 'verb-2-1', 'verb-3-1', 'verb-4-1', 'verb-5-1', 'verb-6-1', 'verb-7-1', 'verb-8-1', 'verb-9-1', 'verb-10-1'];
-        const feedbackEl = document.getElementById('verb-feedback');
-        let allCorrect = true;
-
-        inputIds.forEach(id => {
-            const el = document.getElementById(id);
-            const ans = el.value.trim().toLowerCase();
-            const correctAns = el.dataset.ans;
-
-            el.classList.remove('correct-input', 'incorrect-input');
-            if (ans === correctAns) {
-                el.classList.add('correct-input');
-            } else {
-                el.classList.add('incorrect-input');
-                allCorrect = false;
-            }
-        });
-
-        if (allCorrect) {
-            feedbackEl.textContent = 'Great spelling!';
-            feedbackEl.style.color = '#10B981';
-        } else {
-            feedbackEl.textContent = 'Check the red letters and try again!';
-            feedbackEl.style.color = '#EF4444';
-        }
-    }
-
-    // --- Unit 1: Opposites ---
-    function checkOpposites() {
-        validateInputs(['opp-1', 'opp-2', 'opp-3', 'opp-4'], 'opposites-feedback');
-    }
-
-    // --- Unit 1: Comparatives ---
-    function checkComparatives() {
-        validateInputs(['comp-1', 'comp-2', 'comp-3', 'comp-4'], 'comparatives-feedback');
-    }
-
-    // Initialize all custom games
-    document.addEventListener('DOMContentLoaded', () => {
-        initFloorDragDrop();
-    });
-
-</script>
-</body>
-</html>
+                    <img src
