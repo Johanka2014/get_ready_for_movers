@@ -166,28 +166,101 @@
     <!-- Intro: Where do you live? -->
     <section id="intro" class="content-section active">
         <div class="space-y-8">
-            <div class="activity-card border-rose-400">
+            <div class="activity-card border-sky-400">
                 <h2 class="text-3xl font-bold text-center text-rose-400 mb-6">Where do you live?</h2>
                 <div class="flex justify-center">
-                    <img src="https://johanka2014.github.io/get_ready_for_movers/mod_0/1.png" alt="classroom picture" class="rounded-2xl shadow-md w-full max-w-4xl">
+                    <img src="https://johanka2014.github.io/get_ready_for_movers/mod_0/1.png" alt="addresses" class="rounded-2xl shadow-md w-full max-w-4xl">
                 </div>
             </div>
 
-
-            <div class="activity-card border-rose-400">
-                <h2 class="text-3xl font-bold text-center text-sky-400 mb-6">Numbers practice</h2>
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-400 mb-6">Numbers Practice</h2>
                 <div class="grid md:grid-cols-2 gap-8 items-center">
                     <div>
-                        <img src="https://johanka2014.github.io/get_ready_for_movers/mod_0/2.png" alt="Look at our classroom" class="rounded-2xl shadow-md w-full">
+                        <img src="https://johanka2014.github.io/get_ready_for_movers/mod_0/2.png" alt="Numbers to 100" class="rounded-2xl shadow-md w-full">
                     </div>
                     <div class="text-center">
-                        <p class="text-xl mb-6 text-gray-600">Match the words to the pictures</p>
-                        <a href="https://wordwall.net/resource/92902627" target="_blank" rel="noopener noreferrer" class="nav-button bg-rose-400 hover:bg-rose-400 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
+                        <p class="text-xl mb-6 text-gray-600">Match the words to the numbers</p>
+                        <a href="https://wordwall.net/resource/121456139" target="_blank" rel="noopener noreferrer" class="nav-button bg-rose-400 hover:bg-rose-400 text-white font-bold py-4 px-8 rounded-full text-xl inline-block">
                             Play on Wordwall!
                         </a>
                     </div>
                 </div>
             </div>
+
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-rose-400 mb-6">Write the door numbers</h2>
+                <div class="flex justify-center">
+                    <img src="https://johanka2014.github.io/get_ready_for_movers/mod_0/3.png" alt="front doors" class="rounded-2xl shadow-md w-full max-w-4xl">
+                </div>
+            </div>
+
+
+
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Daisy's Address & The Building</h2>
+                <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                    <img src="https://placehold.co/400x300/e0f2fe/0369a1?text=Daisy's+Address" alt="Daisy talking about her flat" class="rounded-2xl shadow-md w-full md:w-1/2">
+                    <div class="bg-yellow-100 p-6 rounded-xl shadow-inner w-full md:w-1/2">
+                        <p class="text-xl font-semibold mb-4">"Hi! I'm Daisy. This is my address. I live in a flat on the fifth floor. My brother is at home. He's dressing up."</p>
+                        <div class="bg-white p-4 rounded border-2 border-gray-300 font-mono text-lg">
+                            Daisy Simms,<br>
+                            Flat 5a,<br>
+                            74 Browning Road,<br>
+                            Littlemore
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="text-2xl font-bold text-center text-sky-500 mb-4">Who is on which floor?</h3>
+                <p class="text-center text-gray-600 mb-6">Match the people and things to the correct floor of the building.</p>
+
+                <div id="floor-bank" class="flex flex-wrap justify-center gap-3 p-4 bg-sky-50 rounded-xl mb-8 border-2 border-sky-200 min-h-[80px]">
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="ground" id="item-ground">Two men</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="first" id="item-first">A television</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="second" id="item-second">A lamp</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="third" id="item-third">Two girls</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="fourth" id="item-fourth">A woman</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="basement" id="item-basement">A cat</div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Basement (B)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="basement" id="zone-basement"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Ground Floor (G)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="ground" id="zone-ground"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">First Floor (1)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="first" id="zone-first"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Second Floor (2)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="second" id="zone-second"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Third Floor (3)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="third" id="zone-third"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Fourth Floor (4)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="fourth" id="zone-fourth"></div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button onclick="checkFloorMatch()" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg shadow-md hover:shadow-lg">Check Answers</button>
+                    <button onclick="resetFloorMatch()" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg ml-4 shadow-md hover:shadow-lg">Reset</button>
+                </div>
+                <div id="floor-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+        </div>
     </section>
 
     <!-- Unit 1: At the park -->
