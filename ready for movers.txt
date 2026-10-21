@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get ready for Movers</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FEF3C7; /* Amber 100 */
+        }
+        .title-font {
+            font-family: 'Balsamiq Sans', cursive;
+        }
+        .activity-card {
+            background-color: white;
+            border-radius: 2rem;
+            padding: 2rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+            border: 4px solid transparent;
+        }
+        .activity-card:hover {
+            transform: translateY(-5px);
+        }
+        .nav-button {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .nav-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .nav-button.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 4px #FBBF24; /* Amber 400 */
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+
+        /* Styles for text inputs */
+        .text-input {
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            text-align: center;
+        }
+        .text-input.correct-input {
+            border-color: #34D399; /* Emerald 400 */
+            background-color: #f0fdf4; /* Emerald 50 */
+        }
+        .text-input.incorrect-input {
+            border-color: #F87171; /* Red 400 */
+            background-color: #fef2f2; /* Red 50 */
+        }
+
+        /* Single letter inputs for spelling games */
+        .letter-input {
+            border: 2px solid #cbd5e1;
+            border-radius: 0.375rem;
+            padding: 0.25rem;
+            width: 40px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.125rem;
+            transition: all 0.3s;
+        }
+        .letter-input.correct-input {
+            border-color: #34D399;
+            background-color: #d1fae5;
+            color: #065f46;
+        }
+        .letter-input.incorrect-input {
+            border-color: #F87171;
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* Drag and Drop Styles */
+        .draggable-item {
+            padding: 0.5rem 1rem;
+            background-color: #e0f2fe;
+            color: #0c4a6e;
+            border: 2px solid #7dd3fc;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: grab;
+            transition: all 0.2s ease-in-out;
+            display: inline-block;
+        }
+        .draggable-item.dragging {
+            opacity: 0.5;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .drop-zone {
+            background-color: #f1f5f9;
+            border: 3px dashed #cbd5e1;
+            border-radius: 0.75rem;
+            padding: 0.5rem;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+        }
+        .drop-zone.drag-over {
+            background-color: #dbeafe;
+            border-color: #60a5fa;
+        }
+        .drop-zone.correctly-placed {
+            background-color: #d1fae5 !important;
+            border-color: #34d399 !important;
+        }
+        .cursor-not-allowed {
+            cursor: not-allowed !important;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .incorrect-drop {
+            animation: shake 0.5s;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+<!-- Header -->
+<header class="bg-amber-400 p-6 text-center text-white rounded-b-3xl shadow-lg">
+    <h1 class="text-4xl md:text-6xl title-font">Get ready for Movers</h1>
+    <p class="mt-2 text-lg">Let's learn English together!</p>
+</header>
+
+<!-- Navigation Shell -->
+<nav class="p-6 flex flex-wrap justify-center gap-3 md:gap-4">
+    <button onclick="showSection('intro')" class="nav-button active bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">Intro: Where do you live?</button>
+    <button onclick="showSection('unit1')" class="nav-button bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg">① At the park</button>
+    <button onclick="showSection('unit2')" class="nav-button bg-violet-400 hover:bg-violet-500 text-white font-bold py-3 px-6 rounded-full text-lg">② A busy week</button>
+    <button onclick="showSection('unit3')" class="nav-button bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full text-lg">③ In the town</button>
+    <button onclick="showSection('unit4')" class="nav-button bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full text-lg">④ At home</button>
+    <button onclick="showSection('rev1')" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">Revision 1</button>
+    <button onclick="showSection('unit5')" class="nav-button bg-teal-400 hover:bg-teal-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑤ Let's go on holiday</button>
+    <button onclick="showSection('unit6')" class="nav-button bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑥ My favourite book</button>
+    <button onclick="showSection('unit7')" class="nav-button bg-rose-400 hover:bg-rose-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑦ This is my family</button>
+    <button onclick="showSection('unit8')" class="nav-button bg-violet-400 hover:bg-violet-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑧ What's for lunch?</button>
+    <button onclick="showSection('rev2')" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">Revision 2</button>
+    <button onclick="showSection('unit9')" class="nav-button bg-emerald-400 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑨ Do you like animals?</button>
+    <button onclick="showSection('unit10')" class="nav-button bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑩ What's the weather like?</button>
+    <button onclick="showSection('unit11')" class="nav-button bg-teal-400 hover:bg-teal-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑪ What's the matter?</button>
+    <button onclick="showSection('unit12')" class="nav-button bg-sky-400 hover:bg-sky-500 text-white font-bold py-3 px-6 rounded-full text-lg">⑫ In the countryside</button>
+    <button onclick="showSection('rev3')" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg">Revision 3</button>
+</nav>
+
+<main class="container mx-auto p-4 md:p-8">
+
+    <!-- Intro: Where do you live? -->
+    <section id="intro" class="content-section active">
+        <div class="space-y-8">
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-400 mb-6">Where do you live?</h2>
+                <div class="flex justify-center">
+                    <img src="https://johanka2014.github.io/get_ready_for_movers/mod_0/1.png" alt="classroom picture" class="rounded-2xl shadow-md w-full max-w-4xl">
+                </div>
+            </div>
+
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Listen and Point to the Numbers</h2>
+                <div class="flex flex-col items-center gap-6">
+                    <audio controls src="Movers - 2.mp3" class="w-full max-w-md">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 w-full max-w-2xl text-center font-bold text-2xl text-sky-800">
+                        <div class="bg-sky-100 p-4 rounded-xl">10</div>
+                        <div class="bg-sky-100 p-4 rounded-xl">20</div>
+                        <div class="bg-sky-100 p-4 rounded-xl">30</div>
+                        <div class="bg-sky-100 p-4 rounded-xl">40</div>
+                        <div class="bg-sky-100 p-4 rounded-xl">50</div>
+                        <div class="bg-sky-100 p-4 rounded-xl">60</div>
+                        <div class="bg-sky-100 p-4 rounded-xl">70</div>
+                        <div class="bg-sky-100 p-4 rounded-xl">80</div>
+                        <div class="bg-sky-100 p-4 rounded-xl">90</div>
+                        <div class="bg-sky-100 p-4 rounded-xl">100</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Write the Numbers</h2>
+                <p class="text-center text-gray-600 mb-6">Read the words and type the correct number into the box.</p>
+                <div class="max-w-2xl mx-auto space-y-4 text-xl">
+                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
+                        <span class="font-semibold">twenty-one</span>
+                        <input type="text" id="num-21" class="text-input w-24" data-answer="21">
+                    </div>
+                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
+                        <span class="font-semibold">forty-nine</span>
+                        <input type="text" id="num-49" class="text-input w-24" data-answer="49">
+                    </div>
+                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
+                        <span class="font-semibold">fifteen</span>
+                        <input type="text" id="num-15" class="text-input w-24" data-answer="15">
+                    </div>
+                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
+                        <span class="font-semibold">sixty-two</span>
+                        <input type="text" id="num-62" class="text-input w-24" data-answer="62">
+                    </div>
+                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
+                        <span class="font-semibold">ninety-four</span>
+                        <input type="text" id="num-94" class="text-input w-24" data-answer="94">
+                    </div>
+                    <div class="flex justify-between items-center bg-gray-50 p-4 rounded-lg">
+                        <span class="font-semibold">fifty-six</span>
+                        <input type="text" id="num-56" class="text-input w-24" data-answer="56">
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="checkNumbersGame()" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+                </div>
+                <div id="numbers-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+            </div>
+
+            <div class="activity-card border-sky-400">
+                <h2 class="text-3xl font-bold text-center text-sky-600 mb-6">Daisy's Address & The Building</h2>
+                <div class="flex flex-col md:flex-row items-center gap-8 mb-8">
+                    <img src="https://placehold.co/400x300/e0f2fe/0369a1?text=Daisy's+Address" alt="Daisy talking about her flat" class="rounded-2xl shadow-md w-full md:w-1/2">
+                    <div class="bg-yellow-100 p-6 rounded-xl shadow-inner w-full md:w-1/2">
+                        <p class="text-xl font-semibold mb-4">"Hi! I'm Daisy. This is my address. I live in a flat on the fifth floor. My brother is at home. He's dressing up."</p>
+                        <div class="bg-white p-4 rounded border-2 border-gray-300 font-mono text-lg">
+                            Daisy Simms,<br>
+                            Flat 5a,<br>
+                            74 Browning Road,<br>
+                            Littlemore
+                        </div>
+                    </div>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-center text-sky-500 mb-4">Who is on which floor?</h3>
+                <p class="text-center text-gray-600 mb-6">Match the people and things to the correct floor of the building.</p>
+
+                <div id="floor-bank" class="flex flex-wrap justify-center gap-3 p-4 bg-sky-50 rounded-xl mb-8 border-2 border-sky-200 min-h-[80px]">
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="ground" id="item-ground">Two men</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="first" id="item-first">A television</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="second" id="item-second">A lamp</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="third" id="item-third">Two girls</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="fourth" id="item-fourth">A woman</div>
+                    <div class="draggable-item shadow-sm" draggable="true" data-match-id="basement" id="item-basement">A cat</div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Basement (B)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="basement" id="zone-basement"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Ground Floor (G)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="ground" id="zone-ground"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">First Floor (1)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="first" id="zone-first"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Second Floor (2)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="second" id="zone-second"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Third Floor (3)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="third" id="zone-third"></div>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white p-3 rounded-xl shadow-sm border border-sky-100">
+                        <div class="font-bold text-lg w-1/3 text-right text-sky-800">Fourth Floor (4)</div>
+                        <div class="drop-zone w-2/3" data-correct-item="fourth" id="zone-fourth"></div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button onclick="checkFloorMatch()" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg shadow-md hover:shadow-lg">Check Answers</button>
+                    <button onclick="resetFloorMatch()" class="nav-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-full text-lg ml-4 shadow-md hover:shadow-lg">Reset</button>
+                </div>
+                <div id="floor-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-sky-500 hover:bg-sky-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+        </div>
+    </section>
+
+    <!-- Unit 1: At the park -->
+    <section id="unit1" class="content-section">
+        <div class="space-y-8">
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">Complete the verbs</h2>
+                <div class="flex justify-center mb-6">
+                    <img src="https://placehold.co/400x200/ffe4e6/e11d48?text=Jack+and+Daisy+Playing" alt="Jack and Daisy in the park" class="rounded-2xl shadow-md">
+                </div>
+                <p class="text-center text-xl font-semibold mb-6">"Jack and I like playing in the park!"</p>
+                <p class="text-center text-gray-600 mb-6">Fill in the missing letters for each action word.</p>
+
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-4xl mx-auto items-center">
+                    <div class="text-center text-2xl">
+                        h <input type="text" maxlength="1" class="letter-input" id="verb-1-1" data-ans="o"> p
+                    </div>
+                    <div class="text-center text-2xl">
+                        s k <input type="text" maxlength="1" class="letter-input" id="verb-2-1" data-ans="i"> p
+                    </div>
+                    <div class="text-center text-2xl">
+                        w <input type="text" maxlength="1" class="letter-input" id="verb-3-1" data-ans="a"> l k
+                    </div>
+                    <div class="text-center text-2xl">
+                        c l i m <input type="text" maxlength="1" class="letter-input" id="verb-4-1" data-ans="b">
+                    </div>
+                    <div class="text-center text-2xl">
+                        l a <input type="text" maxlength="1" class="letter-input" id="verb-5-1" data-ans="u"> g h
+                    </div>
+                    <div class="text-center text-2xl">
+                        s k <input type="text" maxlength="1" class="letter-input" id="verb-6-1" data-ans="a"> t e
+                    </div>
+                    <div class="text-center text-2xl">
+                        d a n c <input type="text" maxlength="1" class="letter-input" id="verb-7-1" data-ans="e">
+                    </div>
+                    <div class="text-center text-2xl">
+                        c <input type="text" maxlength="1" class="letter-input" id="verb-8-1" data-ans="r"> y
+                    </div>
+                    <div class="text-center text-2xl">
+                        f i <input type="text" maxlength="1" class="letter-input" id="verb-9-1" data-ans="s"> h
+                    </div>
+                    <div class="text-center text-2xl">
+                        h i d <input type="text" maxlength="1" class="letter-input" id="verb-10-1" data-ans="e">
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="checkVerbLetters()" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Spelling</button>
+                </div>
+                <div id="verb-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+            </div>
+
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">Language Practice: Opposites</h2>
+                <div class="flex justify-center mb-6">
+                    <img src="https://placehold.co/600x200/ffe4e6/e11d48?text=Opposites+Illustrations" alt="Tall/short, young/old, big/small" class="rounded-2xl shadow-md w-full max-w-3xl">
+                </div>
+                <p class="text-center text-gray-600 mb-6">Type the correct opposite for each word.</p>
+                <div class="flex flex-wrap justify-center gap-4 font-bold text-xl mb-6">
+                    <span class="px-4 py-2 bg-gray-100 rounded-lg text-gray-500">young</span>
+                    <span class="px-4 py-2 bg-gray-100 rounded-lg text-gray-500">big</span>
+                    <span class="px-4 py-2 bg-gray-100 rounded-lg text-gray-500">short</span>
+                    <span class="px-4 py-2 bg-gray-100 rounded-lg text-gray-500">long</span>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto text-xl">
+                    <div class="flex items-center justify-between bg-rose-50 p-4 rounded-xl">
+                        <span class="font-bold">1. tall</span>
+                        <span class="mx-2 text-rose-400">↔</span>
+                        <input type="text" id="opp-1" class="text-input w-32" data-answer="short">
+                    </div>
+                    <div class="flex items-center justify-between bg-rose-50 p-4 rounded-xl">
+                        <span class="font-bold">2. old</span>
+                        <span class="mx-2 text-rose-400">↔</span>
+                        <input type="text" id="opp-2" class="text-input w-32" data-answer="young">
+                    </div>
+                    <div class="flex items-center justify-between bg-rose-50 p-4 rounded-xl">
+                        <span class="font-bold">3. small</span>
+                        <span class="mx-2 text-rose-400">↔</span>
+                        <input type="text" id="opp-3" class="text-input w-32" data-answer="big">
+                    </div>
+                    <div class="flex items-center justify-between bg-rose-50 p-4 rounded-xl">
+                        <span class="font-bold">4. short (hair)</span>
+                        <span class="mx-2 text-rose-400">↔</span>
+                        <input type="text" id="opp-4" class="text-input w-32" data-answer="long">
+                    </div>
+                </div>
+                <div class="text-center mt-8">
+                    <button onclick="checkOpposites()" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Answers</button>
+                </div>
+                <div id="opposites-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+            </div>
+
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">Language Practice: Comparatives</h2>
+                <div class="max-w-3xl mx-auto space-y-6">
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <img src="https://placehold.co/400x200/ffe4e6/e11d48?text=Tall+Girl+and+Short+Boy" alt="Tall girl and short boy" class="mx-auto rounded-xl shadow-sm mb-4">
+                        <p class="text-xl text-center mb-4">Type <span class="font-bold text-rose-500">taller</span> or <span class="font-bold text-rose-500">shorter</span></p>
+                        <div class="space-y-4 text-lg">
+                            <p>The boy is <input type="text" id="comp-1" class="text-input w-32 mx-2" data-answer="shorter"> than the girl.</p>
+                            <p>The girl is <input type="text" id="comp-2" class="text-input w-32 mx-2" data-answer="taller"> than the boy.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <img src="https://placehold.co/400x200/ffe4e6/e11d48?text=Old+Woman+and+Young+Boy" alt="Old woman and young boy" class="mx-auto rounded-xl shadow-sm mb-4">
+                        <p class="text-xl text-center mb-4">Type <span class="font-bold text-rose-500">older</span> or <span class="font-bold text-rose-500">younger</span></p>
+                        <div class="space-y-4 text-lg">
+                            <p>The man is <input type="text" id="comp-3" class="text-input w-32 mx-2" data-answer="younger"> than the woman.</p>
+                            <p>The woman is <input type="text" id="comp-4" class="text-input w-32 mx-2" data-answer="older"> than the man.</p>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-8">
+                        <button onclick="checkComparatives()" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">Check Sentences</button>
+                    </div>
+                    <div id="comparatives-feedback" class="mt-4 text-center text-xl font-bold h-8"></div>
+                </div>
+            </div>
+
+            <div class="activity-card border-rose-400">
+                <h2 class="text-3xl font-bold text-center text-rose-600 mb-6">Listening Practice Test</h2>
+                <div class="flex flex-col items-center gap-6">
+                    <img src="https://placehold.co/600x400/ffe4e6/e11d48?text=Park+Scene+Test" alt="Park scene with children playing" class="rounded-2xl shadow-md w-full max-w-2xl">
+                    <p class="text-lg text-gray-600">Listen and draw lines (Practice looking at the image while you listen).</p>
+                    <audio controls src="Movers - 9.mp3" class="w-full max-w-md">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="nav-button bg-rose-500 hover:bg-rose-600 text-white font-bold py-3 px-6 rounded-full text-lg">⬆️ Back to Top</button>
+        </div>
+    </section>
+
+    <!-- Empty Placeholders for Remaining Units -->
+    <section id="unit2" class="content-section"><div class="activity-card border-violet-400"><h2 class="text-3xl font-bold text-center text-violet-600">Unit 2: A busy week</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit3" class="content-section"><div class="activity-card border-emerald-400"><h2 class="text-3xl font-bold text-center text-emerald-600">Unit 3: In the town</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit4" class="content-section"><div class="activity-card border-orange-400"><h2 class="text-3xl font-bold text-center text-orange-600">Unit 4: At home</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="rev1" class="content-section"><div class="activity-card border-gray-500"><h2 class="text-3xl font-bold text-center text-gray-600">Revision 1</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit5" class="content-section"><div class="activity-card border-teal-400"><h2 class="text-3xl font-bold text-center text-teal-600">Unit 5: Let's go on holiday</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit6" class="content-section"><div class="activity-card border-sky-400"><h2 class="text-3xl font-bold text-center text-sky-600">Unit 6: My favourite book</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit7" class="content-section"><div class="activity-card border-rose-400"><h2 class="text-3xl font-bold text-center text-rose-600">Unit 7: This is my family</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit8" class="content-section"><div class="activity-card border-violet-400"><h2 class="text-3xl font-bold text-center text-violet-600">Unit 8: What's for lunch?</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="rev2" class="content-section"><div class="activity-card border-gray-500"><h2 class="text-3xl font-bold text-center text-gray-600">Revision 2</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit9" class="content-section"><div class="activity-card border-emerald-400"><h2 class="text-3xl font-bold text-center text-emerald-600">Unit 9: Do you like animals?</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit10" class="content-section"><div class="activity-card border-orange-400"><h2 class="text-3xl font-bold text-center text-orange-600">Unit 10: What's the weather like?</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit11" class="content-section"><div class="activity-card border-teal-400"><h2 class="text-3xl font-bold text-center text-teal-600">Unit 11: What's the matter?</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="unit12" class="content-section"><div class="activity-card border-sky-400"><h2 class="text-3xl font-bold text-center text-sky-600">Unit 12: In the countryside</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+    <section id="rev3" class="content-section"><div class="activity-card border-gray-500"><h2 class="text-3xl font-bold text-center text-gray-600">Revision 3</h2><p class="text-center mt-4">Content coming soon...</p></div></section>
+
+</main>
+
+<script>
+    // --- Navigation Logic ---
+    function showSection(sectionId) {
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.classList.remove('active');
+        });
+        document.querySelectorAll('.nav-button').forEach(button => {
+            button.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+        
+        const activeBtn = Array.from(document.querySelectorAll('.nav-button')).find(btn => {
+            const onclickVal = btn.getAttribute('onclick');
+            return onclickVal && onclickVal.includes(`'${sectionId}'`);
+        });
+        if (activeBtn) activeBtn.classList.add('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // --- Utility Function for Text Input Validation ---
+    function validateInputs(inputIds, feedbackId) {
+        const feedbackEl = document.getElementById(feedbackId);
+        let allCorrect = true;
+        let correctCount = 0;
+
+        inputIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            const userAnswer = el.value.trim().toLowerCase();
+            const correctAnswer = el.dataset.answer.toLowerCase();
+
+            el.classList.remove('correct-input', 'incorrect-input');
+
+            if (userAnswer === correctAnswer) {
+                el.classList.add('correct-input');
+                correctCount++;
+            } else {
+                el.classList.add('incorrect-input');
+                allCorrect = false;
+            }
+        });
+
+        if (allCorrect) {
+            feedbackEl.textContent = 'Excellent! All correct!';
+            feedbackEl.style.color = '#10B981';
+        } else {
+            feedbackEl.textContent = `You got ${correctCount} out of ${inputIds.length} correct. Try again!`;
+            feedbackEl.style.color = '#EF4444';
+        }
+    }
+
+    // --- Intro: Numbers Game ---
+    function checkNumbersGame() {
+        validateInputs(['num-21', 'num-49', 'num-15', 'num-62', 'num-94', 'num-56'], 'numbers-feedback');
+    }
+
+    // --- Intro: Drag & Drop Floors ---
+    let draggedFloorItem = null;
+
+    function initFloorDragDrop() {
+        document.querySelectorAll('#floor-bank .draggable-item').forEach(item => {
+            item.addEventListener('dragstart', (e) => {
+                draggedFloorItem = item;
+                e.dataTransfer.setData('text/plain', item.dataset.matchId);
+                item.classList.add('dragging');
+            });
+            item.addEventListener('dragend', () => {
+                item.classList.remove('dragging');
+                draggedFloorItem = null;
+            });
+        });
+
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.addEventListener('dragover', (e) => {
+                e.preventDefault(); 
+                zone.classList.add('drag-over');
+            });
+            zone.addEventListener('dragleave', () => {
+                zone.classList.remove('drag-over');
+            });
+            zone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                zone.classList.remove('drag-over');
+
+                if (draggedFloorItem && zone.children.length === 0) {
+                    zone.appendChild(draggedFloorItem);
+                }
+            });
+        });
+    }
+
+    function checkFloorMatch() {
+        const zones = ['basement', 'ground', 'first', 'second', 'third', 'fourth'];
+        let correctCount = 0;
+        const feedbackEl = document.getElementById('floor-feedback');
+
+        zones.forEach(z => {
+            const zone = document.getElementById(`zone-${z}`);
+            const item = zone.querySelector('.draggable-item');
+            zone.classList.remove('incorrect-drop', 'correctly-placed');
+
+            if (item) {
+                if (item.dataset.matchId === z) {
+                    zone.classList.add('correctly-placed');
+                    item.draggable = false;
+                    item.classList.add('cursor-not-allowed');
+                    correctCount++;
+                } else {
+                    zone.classList.add('incorrect-drop');
+                    setTimeout(() => zone.classList.remove('incorrect-drop'), 500);
+                }
+            } else {
+                zone.classList.add('incorrect-drop');
+                setTimeout(() => zone.classList.remove('incorrect-drop'), 500);
+            }
+        });
+
+        if (correctCount === zones.length) {
+            feedbackEl.textContent = 'Fantastic! You found where everyone lives!';
+            feedbackEl.style.color = '#10B981';
+        } else {
+            feedbackEl.textContent = `You placed ${correctCount} items correctly. Keep trying!`;
+            feedbackEl.style.color = '#EF4444';
+        }
+    }
+
+    function resetFloorMatch() {
+        const bank = document.getElementById('floor-bank');
+        document.querySelectorAll('.draggable-item').forEach(item => {
+            item.draggable = true;
+            item.classList.remove('cursor-not-allowed');
+            bank.appendChild(item);
+        });
+        document.querySelectorAll('.drop-zone').forEach(zone => {
+            zone.classList.remove('correctly-placed', 'incorrect-drop');
+        });
+        document.getElementById('floor-feedback').textContent = '';
+    }
+
+    // --- Unit 1: Missing Letter Verbs ---
+    function checkVerbLetters() {
+        const inputIds = ['verb-1-1', 'verb-2-1', 'verb-3-1', 'verb-4-1', 'verb-5-1', 'verb-6-1', 'verb-7-1', 'verb-8-1', 'verb-9-1', 'verb-10-1'];
+        const feedbackEl = document.getElementById('verb-feedback');
+        let allCorrect = true;
+
+        inputIds.forEach(id => {
+            const el = document.getElementById(id);
+            const ans = el.value.trim().toLowerCase();
+            const correctAns = el.dataset.ans;
+
+            el.classList.remove('correct-input', 'incorrect-input');
+            if (ans === correctAns) {
+                el.classList.add('correct-input');
+            } else {
+                el.classList.add('incorrect-input');
+                allCorrect = false;
+            }
+        });
+
+        if (allCorrect) {
+            feedbackEl.textContent = 'Great spelling!';
+            feedbackEl.style.color = '#10B981';
+        } else {
+            feedbackEl.textContent = 'Check the red letters and try again!';
+            feedbackEl.style.color = '#EF4444';
+        }
+    }
+
+    // --- Unit 1: Opposites ---
+    function checkOpposites() {
+        validateInputs(['opp-1', 'opp-2', 'opp-3', 'opp-4'], 'opposites-feedback');
+    }
+
+    // --- Unit 1: Comparatives ---
+    function checkComparatives() {
+        validateInputs(['comp-1', 'comp-2', 'comp-3', 'comp-4'], 'comparatives-feedback');
+    }
+
+    // Initialize all custom games
+    document.addEventListener('DOMContentLoaded', () => {
+        initFloorDragDrop();
+    });
+
+</script>
+</body>
+</html>
